@@ -14,6 +14,7 @@ class Game:
         self.background_img = pygame.image.load('/Users/kotori/Desktop/testgit/FireFly/assets/bachgroud.webp')
         self.background_img = pygame.transform.scale(self.background_img, (800, 600))
         self.reset_game()
+        self.input_active = False  # Thêm biến input_active
 
     def reset_game(self):
         self.targets.empty()
@@ -23,22 +24,20 @@ class Game:
 
     def run(self):
         running = True
-        input_active = False
         input_text = ""
         input_rect = pygame.Rect(400 - 100, 300 - 25, 200, 50)
 
         while running:
             self.screen.blit(self.background_img, (0, 0))
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.KEYDOWN:
-                    if input_active:
+                    if self.input_active:  # Chỉnh thành self.input_active
                         if event.key == pygame.K_RETURN:
                             if self.check_color(input_text.upper()):
                                 running = False
-                            input_active = False
+                            self.input_active = False  # Chỉnh thành self.input_active
                             input_text = ""
                         elif event.key == pygame.K_BACKSPACE:
                             input_text = input_text[:-1]
@@ -46,20 +45,21 @@ class Game:
                             input_text += event.unicode
 
             keys = pygame.key.get_pressed()
-            self.firefly.move(keys[pygame.K_RIGHT] - keys[pygame.K_LEFT], 
+            self.firefly.move(keys[pygame.K_RIGHT] - keys[pygame.K_LEFT],
                               keys[pygame.K_DOWN] - keys[pygame.K_UP])
-
             collided = pygame.sprite.spritecollide(self.firefly, self.targets, False)
-            if collided and not input_active:
-                input_active = True
+            if collided and not self.input_active:
+                self.input_active = True  # Chỉnh thành self.input_active
+            elif not collided:  # Kiểm tra khi không va chạm
+                self.input_active = False  # Chỉnh thành self.input_active
 
             self.targets.draw(self.screen)
             self.screen.blit(self.firefly.image, self.firefly.rect)
-            
+
             score_text = self.font.render(f"Score: {self.score}", True, (255, 255, 255))
             self.screen.blit(score_text, (10, 10))
 
-            if input_active:
+            if self.input_active:  # Chỉnh thành self.input_active
                 pygame.draw.rect(self.screen, (255, 255, 255), input_rect, 2)
                 text_surface = self.font.render(input_text, True, (255, 255, 255))
                 self.screen.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
