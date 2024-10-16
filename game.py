@@ -60,7 +60,8 @@ class Game:
             self.screen.blit(score_text, (10, 10))
 
             if self.input_active:  # Chỉnh thành self.input_active
-                pygame.draw.rect(self.screen, (255, 255, 255), input_rect, 2)
+                # pygame.draw.rect(self.screen, (255, 255, 255), input_rect, 2)
+                pygame.draw.rect(self.screen, (255, 255, 255), input_rect, 2, border_radius=15)  # Thêm border radius
                 text_surface = self.font.render(input_text, True, (255, 255, 255))
                 self.screen.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
 
