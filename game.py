@@ -11,7 +11,7 @@ class Game:
         self.targets = pygame.sprite.Group()
         self.score = 0
         self.font = pygame.font.Font(None, 36)
-        self.background_img = pygame.image.load('assets/bachgroud.webp')
+        self.background_img = pygame.image.load('/Users/kotori/Desktop/testgit/FireFly/assets/bachgroud.webp')
         self.background_img = pygame.transform.scale(self.background_img, (800, 600))
         self.reset_game()
 

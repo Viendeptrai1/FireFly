@@ -20,7 +20,7 @@ def show_menu():
     high_scores_button = Button(300, 300, 200, 50, 'High Scores', GRAY, BLACK)
     quit_button = Button(300, 400, 200, 50, 'Quit', GRAY, BLACK)
 
-    background_img = pygame.image.load('assets/bachgroud.webp')
+    background_img = pygame.image.load('/Users/kotori/Desktop/testgit/FireFly/assets/bachgroud.webp')
     background_img = pygame.transform.scale(background_img, (WIDTH, HEIGHT))
 
     while True:
@@ -51,7 +51,7 @@ def show_menu():
 def show_high_scores(scores):
     back_button = Button(300, 500, 200, 50, 'Back to Menu', GRAY, BLACK)
 
-    background_img = pygame.image.load('assets/bachgroud.webp')
+    background_img = pygame.image.load('/Users/kotori/Desktop/testgit/FireFly/assets/bachgroud.webp')
     background_img = pygame.transform.scale(background_img, (WIDTH, HEIGHT))
 
     while True:
